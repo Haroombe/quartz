@@ -26,28 +26,56 @@ export const OdyTagsTransformer: QuartzTransformerPlugin<Partial<Options>> = (us
   return {
     name: "OdyTagsTransformer",
     textTransform(_ctx, src) {
-      const content = src.toString()
+      let content = src.toString()
 
       const tagsLineMatch = content.match(tagslineRegex)
       const tags: string[] = []
 
+      // Build replacement line: tags prefixed with '#', joined by spaces
+
+      // Replace the whole Tags: line with replacement line
+      content = src.replace(tagslineRegex, "")
       if (tagsLineMatch) {
         const tagsLine = tagsLineMatch[0]
-
         let match
         while ((match = tagRegex.exec(tagsLine)) !== null) {
-          const tag = String(match[1].split("/").pop())
+          const pathPart = match[1] // before alias
+          const tag = pathPart.split("/").pop()
           if (tag) tags.push(tag)
         }
       }
 
-      // Build replacement line: tags prefixed with '#', joined by spaces
-      const replacementLine = tags.map((t) => `#${t}`).join(" ")
+      if (tags.length > 0) {
+        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/)
+        if (frontmatterMatch) {
+          let frontmatter = frontmatterMatch[1]
 
-      // Replace the whole Tags: line with replacement line
-      const content_ = src.replace(tagslineRegex, replacementLine)
+          const tagsKeyMatch = frontmatter.match(/^tags:\s*\n([\s\S]*)/m)
+          if (tagsKeyMatch) {
+            // Merge tags if `tags:` key exists
+            const existingTags = [...frontmatter.matchAll(/^\s*-\s*(.+)$/gm)].map(m => m[1])
+            const mergedTags = Array.from(new Set([...existingTags, ...tags]))
+            frontmatter = frontmatter.replace(
+              /^tags:\s*\n([\s\S]*?)(?=\n\S|$)/m,
+              `tags:\n${mergedTags.map(t => `  - ${t}`).join("\n")}`
+            )
+          } else {
+            // Add new tags key
+            frontmatter += `\ntags:\n${tags.map(t => `  - ${t}`).join("\n")}`
+          }
 
-      return content_
+          // Replace the old frontmatter in content
+          content = content.replace(
+            /^---\n([\s\S]*?)\n---/,
+            `---\n${frontmatter}\n---`
+          )
+        } else {
+          // No frontmatter → add fresh one
+          const tagsYaml = `---\ntags:\n${tags.map(t => `  - ${t}`).join("\n")}\n---\n`
+          content = tagsYaml + content
+        }
+      }
+      return content
     },
   }
 }
