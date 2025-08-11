@@ -1,3 +1,4 @@
+export { OdyTagsTransformer } from './odytags'
 export { FrontMatter } from "./frontmatter"
 export { GitHubFlavoredMarkdown } from "./gfm"
 export { Citations } from "./citations"

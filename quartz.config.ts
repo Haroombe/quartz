@@ -67,6 +67,7 @@ const config: QuartzConfig = {
   },
   plugins: {
     transformers: [
+      Plugin.OdyTagsTransformer(),
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
         priority: ["frontmatter", "git", "filesystem"],
