@@ -1,0 +1,52 @@
+.ascii-art-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  
+  .ascii-art {
+    font-family: 'Courier New', Consolas, 'Lucida Console', monospace;
+    font-size: 0.875rem;
+    line-height: 1.2;
+    white-space: pre;
+    color: var(--text, currentColor);
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    
+    // Ensure ASCII characters don't wrap
+    overflow-x: auto;
+    
+    // Mobile specific styling
+    &.mobile-ascii {
+      font-size: 0.75rem;
+      line-height: 1.1;
+      padding: 0.5rem;
+    }
+    
+    // Desktop specific styling  
+    &.desktop-ascii {
+      font-size: 0.875rem;
+      line-height: 1.2;
+      padding: 1rem;
+    }
+  }
+}
+
+// Dark mode support
+[saved-theme="dark"] .ascii-art-container .ascii-art,
+:root.dark .ascii-art-container .ascii-art,
+.dark .ascii-art-container .ascii-art {
+  color: var(--text-dark, #ffffff);
+}
+
+// Optional: Add some animation
+.ascii-art-container .ascii-art {
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}

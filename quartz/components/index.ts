@@ -1,3 +1,5 @@
+import MainSiteLink from "./MainSiteLink"
+import AsciiArt from "./AsciiArt"
 import Content from "./pages/Content"
 import TagContent from "./pages/TagContent"
 import FolderContent from "./pages/FolderContent"
@@ -25,6 +27,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 
 export {
+  MainSiteLink,
   ArticleTitle,
   Content,
   TagContent,
@@ -42,6 +45,7 @@ export {
   Backlinks,
   Search,
   Footer,
+  AsciiArt,
   DesktopOnly,
   MobileOnly,
   RecentNotes,

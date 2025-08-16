@@ -18,6 +18,9 @@ PageTitle.css = `
   font-size: 1.75rem;
   margin: 0;
   font-family: var(--titleFont);
+  @media (max-width: 768px) {
+  font-size: 1.4rem;
+}
 }
 `
 

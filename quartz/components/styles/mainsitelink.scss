@@ -1,0 +1,34 @@
+.mainsitelink {
+  display: inline-block;
+  text-decoration: none;
+
+  .mainSiteLinkIcon {
+    transition: all 0.3s ease;
+
+    // Light mode - normal colors
+    filter: none;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Dark mode - invert colors
+[saved-theme="dark"] .mainsitelink .mainSiteLinkIcon,
+:root.dark .mainsitelink .mainSiteLinkIcon,
+.dark .mainsitelink .mainSiteLinkIcon {
+  filter: invert(1);
+}
+
+// Alternative approach if Quartz uses a different dark mode class
+// Replace 'darkmode' with whatever class your theme actually uses
+.darkmode .mainsitelink .mainSiteLinkIcon {
+  filter: invert(1);
+}
+
+:root[saved-theme="dark"] {
+  .mainsitelink .mainSiteLinkIcon {
+    filter: invert(1);
+  }
+}
