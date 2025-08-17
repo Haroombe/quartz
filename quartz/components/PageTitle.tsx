@@ -15,13 +15,21 @@ const PageTitle: QuartzComponent = ({ fileData, cfg, displayClass }: QuartzCompo
 
 PageTitle.css = `
 .page-title {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   margin: 0;
   font-family: var(--titleFont);
-  @media (max-width: 768px) {
-  font-size: 1.4rem;
-}
-}
-`
+  
+
+  
+
+  
+  /* Small Mobile (up to 480px) */
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 1.0rem;
+  }
+}`
 
 export default (() => PageTitle) satisfies QuartzComponentConstructor

@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "~haroom.be",
+    pageTitle: "~vault.haroombe",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -16,7 +16,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "haroom.be",
+    baseUrl: "https://vault.haroombe.com",
     ignorePatterns: [
       "private",
       ".obsidian",
