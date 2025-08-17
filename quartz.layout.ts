@@ -11,24 +11,32 @@ export const sharedPageComponents: SharedLayout = {
   }),
 }
 
+const homepageSpellings = ["index"]
+
+// Helper function to check if current page is homepage
+const isHomepage = (slug: string | undefined) => {
+  if (!slug) return false
+  return homepageSpellings.map((s) => s.toLowerCase()).includes(slug.toLowerCase())
+}
+
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
       component: Component.ArticleTitle(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => !isHomepage(page.fileData.slug),
     }),
     Component.ConditionalRender({
       component: Component.ContentMeta(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => !isHomepage(page.fileData.slug),
     }),
     Component.ConditionalRender({
       component: Component.TagList(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => !isHomepage(page.fileData.slug),
     }),
     Component.ConditionalRender({
       component: Component.AsciiArt(),
-      condition: (page) => page.fileData.slug === "index",
+      condition: (page) => isHomepage(page.fileData.slug),
     }),
   ],
   left: [
