@@ -15,7 +15,7 @@ interface MainSiteLinkOptions {
 const MainSiteLink: QuartzComponent = ({ displayClass, cfg, fileData }: QuartzComponentProps) => {
   // You can configure these options
   const options: MainSiteLinkOptions = {
-    url: "https://example.com", // Replace with your main site URL
+    url: "https://www.haroombe.com", // Replace with your main site URL
     title: "Go to Main Site",
     openInNewTab: true
   }
@@ -28,8 +28,7 @@ const MainSiteLink: QuartzComponent = ({ displayClass, cfg, fileData }: QuartzCo
     <a
       href={options.url}
       class={classNames(displayClass, "mainsitelink")}
-      target={options.openInNewTab ? "_blank" : "_self"}
-      rel={options.openInNewTab ? "noopener noreferrer" : undefined}
+      target="_self"
       aria-label="Main Site Link"
     >
       <svg
